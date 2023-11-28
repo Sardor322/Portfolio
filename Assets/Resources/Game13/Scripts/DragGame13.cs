@@ -73,14 +73,17 @@ public class DragGame13 : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoi
                 collider2d.enabled = false;
                 spriteRenderer.sortingOrder = 20;
                 objetsToMove.DOKill();
-                transform.DOMove(rightSlot.position, 0.5f).SetEase(Ease.InBack).OnComplete(() =>
+                
+                transform.DOMove(rightSlot.position, 0.7f).SetEase(Ease.InBack).OnComplete(() =>
                 {
+                    gameManager.counterGame++;
                     spriteRenderer.sortingOrder = 19;
                     gameManager.MoveTopObjectToDown();
                     spriteRenererDoorOpen.DOFade(0f, 0.015f);
                     spriteRenererDoorClose.DOFade(255f, 0.015f);
                 });
             }
+            
             if (!isDragging)
             {
                 return;
@@ -114,5 +117,9 @@ public class DragGame13 : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoi
         {
             objetsToMove.DOFade(0.55f, 0.9f).SetLoops(-1, LoopType.Yoyo);
         }
+    }
+    IEnumerator moveSlot()
+    {
+
     }
 }
